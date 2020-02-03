@@ -1,0 +1,165 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Express Mongo Web API Boilerplate",
+        "description": "A boilerplate for web server using express and mongodb<br><b>NOTE: Change the host and port in swagger.json if you are changing the default host and port in <code>.env</code> fil/e</b>",
+        "version": "1.0"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "host": "127.0.0.1:6060",
+    "basePath": "/api",
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "scheme": "Bearer"
+        }
+    },
+    "paths": {
+        "/status-check": {
+            "get": {
+                "tags": [
+                    "Debug"
+                ],
+                "description": "Sample api for testing whether the server is running",
+                "parameters": [],
+                "responses": {}
+            }
+        },
+        "/user-auth/create": {
+            "post": {
+                "tags": [
+                    "User Create"
+                ],
+                "description": "Sample API for user creation",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "user",
+                        "required": [
+                            "fullName",
+                            "email",
+                            "password"
+                        ],
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "fullName": {
+                                    "type": "string",
+                                    "example": "Test User"
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "example": "test@example.com"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "test"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/user-auth/authenticate": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "description": "API For generate JWT token",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "user",
+                        "required": [
+                            "email",
+                            "password"
+                        ],
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "example": "test@example.com"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "test"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/user": {
+            "get": {
+                "tags": [
+                    "Authorization required Sample APIs "
+                ],
+                "description": "API to get the current authenticated user",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [],
+                "responses": {}
+            }
+        },
+        "/user/check-admin-role": {
+            "get": {
+                "tags": [
+                    "Authorization required Sample APIs "
+                ],
+                "description": "Sample API which allow only authenticated user with role <b>admin</b>",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [],
+                "responses": {}
+            }
+        },
+        "/user/check-user-role": {
+            "get": {
+                "tags": [
+                    "Authorization required Sample APIs "
+                ],
+                "description": "Sample API which allow only authenticated user with role <b>user</b>",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [],
+                "responses": {}
+            }
+        },
+        "/user/check-any-role": {
+            "get": {
+                "tags": [
+                    "Authorization required Sample APIs "
+                ],
+                "description": "Sample API which allow all authenticated users with role <b>admin</b>",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [],
+                "responses": {}
+            }
+        }
+    }
+}
